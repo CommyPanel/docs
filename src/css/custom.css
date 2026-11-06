@@ -1,0 +1,729 @@
+/*
+ * CommyPanel docs theme.
+ *
+ * The colours, radii and fonts are the panel's own (resources/css/app.css in the
+ * panel repository), with the same variable names, so the docs and the product
+ * look like one thing:
+ *   light  = commy-light  warm stone with an orange accent
+ *   dark   = commy-dim    warm dimmed dark (Docusaurus's dark mode)
+ *   black  = commy-dark   true black, a tone of dark mode: <html data-tone="black">
+ * base-200 is the page, base-100 the surface of cards, sidebar and top bar,
+ * base-300 the borders. Use these tokens, never hard-coded colours.
+ */
+
+@import '@fontsource/instrument-sans/400.css';
+@import '@fontsource/instrument-sans/500.css';
+@import '@fontsource/instrument-sans/600.css';
+@import '@fontsource/instrument-sans/700.css';
+
+/* ---------------------------------------------------------------- tokens */
+
+:root,
+html[data-theme='light'] {
+  color-scheme: light;
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97% 0.001 106.424);
+  --color-base-300: oklch(92.3% 0.003 48.717);
+  --color-base-content: oklch(21.6% 0.006 56.043);
+  --color-primary: oklch(55.3% 0.195 38.402);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(37.4% 0.01 67.558);
+  --color-accent: oklch(66.6% 0.179 58.318);
+  --color-neutral: oklch(26.8% 0.007 34.298);
+  --color-info: oklch(50% 0.134 242.749);
+  --color-success: oklch(44.8% 0.119 151.328);
+  --color-warning: oklch(48% 0.11 70);
+  --color-error: oklch(50.5% 0.213 27.518);
+}
+
+/* dim: the dark mode */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --color-base-100: oklch(21.6% 0.006 56.043);
+  --color-base-200: oklch(14.7% 0.004 49.25);
+  --color-base-300: oklch(30% 0.007 34.298);
+  --color-base-content: oklch(97% 0.001 106.424);
+  --color-primary: oklch(70.5% 0.213 47.604);
+  --color-primary-content: oklch(14.7% 0.004 49.25);
+  --color-secondary: oklch(70.9% 0.01 56.259);
+  --color-accent: oklch(82.8% 0.189 84.429);
+  --color-neutral: oklch(86.9% 0.005 56.366);
+  --color-info: oklch(74.6% 0.16 232.661);
+  --color-success: oklch(79.2% 0.209 151.711);
+  --color-warning: oklch(82.8% 0.189 84.429);
+  --color-error: oklch(70.4% 0.191 22.216);
+}
+
+/* black: true black, near-black cards with borders */
+html[data-theme='dark'][data-tone='black'] {
+  --color-base-100: oklch(14.7% 0.004 49.25);
+  --color-base-200: oklch(0% 0 0);
+  --color-base-300: oklch(28% 0.006 34.298);
+}
+
+:root {
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+}
+
+/* Code colours, per theme. Reds and oranges are kept for keywords; the rest comes from the status colours. */
+:root,
+html[data-theme='light'] {
+  --code-comment: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+  --code-punctuation: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --code-property: var(--color-warning);
+}
+html[data-theme='dark'] {
+  --code-comment: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+  --code-punctuation: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --code-property: var(--color-accent);
+}
+
+/* ---------------------------------------------- Docusaurus (Infima) mapping */
+
+:root,
+html[data-theme='light'],
+html[data-theme='dark'] {
+  --ifm-font-family-base:
+    'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --ifm-font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ifm-font-size-base: 100%;
+  --ifm-line-height-base: 1.7;
+  --ifm-code-font-size: 85%;
+
+  --ifm-color-primary: var(--color-primary);
+  --ifm-color-primary-dark: color-mix(in oklab, var(--color-primary) 92%, black);
+  --ifm-color-primary-darker: color-mix(in oklab, var(--color-primary) 86%, black);
+  --ifm-color-primary-darkest: color-mix(in oklab, var(--color-primary) 72%, black);
+  --ifm-color-primary-light: color-mix(in oklab, var(--color-primary) 90%, white);
+  --ifm-color-primary-lighter: color-mix(in oklab, var(--color-primary) 80%, white);
+  --ifm-color-primary-lightest: color-mix(in oklab, var(--color-primary) 60%, white);
+  --ifm-color-secondary: var(--color-secondary);
+  --ifm-color-info: var(--color-info);
+  --ifm-color-success: var(--color-success);
+  --ifm-color-warning: var(--color-warning);
+  --ifm-color-danger: var(--color-error);
+
+  --ifm-background-color: var(--color-base-200);
+  --ifm-background-surface-color: var(--color-base-100);
+  --ifm-color-content: var(--color-base-content);
+  --ifm-color-content-secondary: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --ifm-heading-color: var(--color-base-content);
+  --ifm-link-color: var(--color-primary);
+  --ifm-link-hover-color: var(--color-primary);
+  --ifm-link-decoration: none;
+  --ifm-link-hover-decoration: underline;
+
+  --ifm-color-emphasis-0: var(--color-base-100);
+  --ifm-color-emphasis-100: var(--color-base-200);
+  --ifm-color-emphasis-200: color-mix(in oklab, var(--color-base-300) 60%, var(--color-base-200));
+  --ifm-color-emphasis-300: var(--color-base-300);
+  --ifm-color-emphasis-400: color-mix(in oklab, var(--color-base-content) 28%, transparent);
+  --ifm-color-emphasis-500: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+  --ifm-color-emphasis-600: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+  --ifm-color-emphasis-700: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --ifm-color-emphasis-800: color-mix(in oklab, var(--color-base-content) 82%, transparent);
+  --ifm-color-emphasis-900: color-mix(in oklab, var(--color-base-content) 92%, transparent);
+  --ifm-color-emphasis-1000: var(--color-base-content);
+
+  --ifm-global-radius: var(--radius-field);
+  --ifm-card-border-radius: var(--radius-box);
+  --ifm-code-border-radius: var(--radius-field);
+  --ifm-code-background: var(--color-base-200);
+  --ifm-code-padding-vertical: 0.1rem;
+  --ifm-code-padding-horizontal: 0.35rem;
+  --ifm-pre-background: var(--color-base-200);
+  --ifm-hr-border-color: var(--color-base-300);
+  --ifm-table-border-color: var(--color-base-300);
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: transparent;
+  --ifm-toc-border-color: var(--color-base-300);
+  --ifm-blockquote-color: color-mix(in oklab, var(--color-base-content) 75%, transparent);
+  --ifm-breadcrumb-color-active: var(--color-primary);
+
+  --ifm-navbar-height: 4rem;
+  --ifm-navbar-background-color: var(--color-base-100);
+  --ifm-navbar-shadow: none;
+  --ifm-navbar-link-color: var(--color-base-content);
+  --ifm-navbar-link-hover-color: var(--color-primary);
+  --ifm-menu-color: color-mix(in oklab, var(--color-base-content) 85%, transparent);
+  --ifm-menu-color-active: var(--color-primary);
+  --ifm-menu-color-background-active: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  --ifm-menu-color-background-hover: var(--color-base-200);
+  --ifm-footer-background-color: var(--color-base-100);
+  --ifm-footer-color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --ifm-footer-link-color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --ifm-footer-title-color: var(--color-base-content);
+  --ifm-tabs-color-active: var(--color-primary);
+  --ifm-tabs-color-active-border: var(--color-primary);
+  --docusaurus-highlighted-code-line-bg: color-mix(in oklab, var(--color-primary) 12%, transparent);
+}
+
+/* ------------------------------------------------------------------ page */
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-base-200);
+  color: var(--color-base-content);
+}
+
+#__docusaurus,
+.main-wrapper {
+  background-color: var(--color-base-200);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.markdown h1:first-child {
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.markdown h2 {
+  font-size: 1.5rem;
+  margin-top: 2.25rem;
+}
+
+.markdown h3 {
+  font-size: 1.2rem;
+  margin-top: 1.75rem;
+}
+
+.markdown > p,
+.markdown > ul,
+.markdown > ol {
+  margin-bottom: 1rem;
+}
+
+.markdown li + li {
+  margin-top: 0.25rem;
+}
+
+/* ---------------------------------------------------------------- navbar */
+
+.navbar {
+  border-bottom: 1px solid var(--color-base-300);
+  padding: 0 1rem;
+}
+
+.navbar__brand {
+  gap: 0.25rem;
+}
+
+.navbar__logo {
+  height: 2.25rem;
+  margin-right: 0.6rem;
+}
+
+.navbar__logo img {
+  height: 100%;
+}
+
+.navbar__title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: -0.015em;
+}
+
+.navbar__link {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-selector);
+  padding: 0.4rem 0.7rem;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  background: var(--ifm-menu-color-background-hover);
+  color: var(--color-base-content);
+  text-decoration: none;
+}
+
+.navbar__link--active {
+  color: var(--color-primary);
+  background: var(--ifm-menu-color-background-active);
+}
+
+.navbar__search-input {
+  background-color: var(--color-base-200);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-field);
+  color: var(--color-base-content);
+}
+
+.navbar__search-input:focus {
+  outline: 2px solid color-mix(in oklab, var(--color-primary) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.navbar-sidebar {
+  background-color: var(--color-base-100);
+}
+
+/* --------------------------------------------------------------- sidebar */
+
+.theme-doc-sidebar-container {
+  background-color: var(--color-base-100);
+  border-right: 1px solid var(--color-base-300) !important;
+}
+
+.menu {
+  font-size: 0.9375rem;
+}
+
+.menu__link {
+  border-radius: var(--radius-selector);
+  font-weight: 500;
+}
+
+.menu__list-item-collapsible {
+  border-radius: var(--radius-selector);
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 600;
+}
+
+.menu__list .menu__list {
+  margin-left: 0.4rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--color-base-300);
+}
+
+.theme-doc-sidebar-menu > .menu__list-item > .menu__list-item-collapsible > .menu__link {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--color-base-content) 62%, transparent);
+}
+
+/* ---------------------------------------------------- the page as a card */
+
+[class*='docItemContainer'] > article {
+  background: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  padding: 2rem 2.25rem;
+}
+
+@media (max-width: 996px) {
+  [class*='docItemContainer'] > article {
+    padding: 1.25rem;
+  }
+}
+
+.theme-doc-breadcrumbs {
+  margin-bottom: 1rem;
+}
+
+.breadcrumbs__link {
+  background: transparent;
+  border-radius: var(--radius-selector);
+}
+
+.pagination-nav {
+  margin-top: 1.5rem;
+}
+
+.pagination-nav__link {
+  background: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  transition: border-color 0.15s;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--color-primary);
+  text-decoration: none;
+}
+
+.pagination-nav__sublabel {
+  font-size: 0.8125rem;
+}
+
+.pagination-nav__label {
+  font-weight: 600;
+}
+
+.table-of-contents {
+  font-size: 0.875rem;
+}
+
+.table-of-contents__link--active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.theme-doc-footer {
+  margin-top: 2.5rem;
+}
+
+.theme-edit-this-page {
+  color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.footer {
+  border-top: 1px solid var(--color-base-300);
+}
+
+.footer__title {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.footer__link-item:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.footer__copyright {
+  font-size: 0.8125rem;
+}
+
+/* ---------------------------------------------------------------- tables */
+
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  overflow: hidden;
+  font-size: 0.9375rem;
+}
+
+.markdown table th {
+  background: var(--color-base-200);
+  color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.markdown table th,
+.markdown table td {
+  border: 0;
+  border-bottom: 1px solid var(--color-base-300);
+  padding: 0.6rem 0.9rem;
+  vertical-align: top;
+}
+
+.markdown table tr:last-child td {
+  border-bottom: 0;
+}
+
+.markdown table tr {
+  background: transparent;
+}
+
+@media (max-width: 720px) {
+  .markdown table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* ------------------------------------------------------------------ code */
+
+.markdown code {
+  font-size: 0.85em;
+  border: 0;
+}
+
+.markdown a code,
+.markdown h1 code,
+.markdown h2 code,
+.markdown h3 code {
+  color: inherit;
+}
+
+[class*='codeBlockContainer'] {
+  background: var(--color-base-200);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-field);
+  box-shadow: none;
+}
+
+[class*='codeBlockTitle'] {
+  background: var(--color-base-200);
+  border-bottom: 1px solid var(--color-base-300);
+  color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.theme-code-block pre,
+.theme-code-block code {
+  background: transparent;
+}
+
+.theme-code-block button {
+  background: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-field);
+  color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+}
+
+.theme-code-block button:hover {
+  color: var(--color-primary);
+}
+
+blockquote {
+  border-left: 3px solid var(--color-base-300);
+  padding-left: 0.9rem;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* ------------------------------------------------------------ admonitions */
+
+.theme-admonition,
+.alert {
+  --cp-tone: var(--color-info);
+  border: 1px solid color-mix(in oklab, var(--cp-tone) 35%, transparent);
+  border-left-width: 1px;
+  border-radius: var(--radius-box);
+  background: color-mix(in oklab, var(--cp-tone) 10%, var(--color-base-100));
+  color: var(--color-base-content);
+  box-shadow: none;
+  padding: 0.9rem 1.1rem;
+}
+
+.theme-admonition-note,
+.alert--secondary {
+  --cp-tone: var(--color-secondary);
+}
+.theme-admonition-tip,
+.alert--success {
+  --cp-tone: var(--color-success);
+}
+.theme-admonition-info,
+.alert--info {
+  --cp-tone: var(--color-info);
+}
+.theme-admonition-warning,
+.alert--warning {
+  --cp-tone: var(--color-warning);
+}
+.theme-admonition-danger,
+.alert--danger {
+  --cp-tone: var(--color-error);
+}
+
+[class*='admonitionHeading'] {
+  color: var(--cp-tone);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+[class*='admonitionIcon'] svg {
+  fill: var(--cp-tone);
+}
+
+.admonition > div > :last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------- buttons */
+
+.button {
+  border-radius: var(--radius-field);
+  font-weight: 500;
+}
+
+.button--primary {
+  --ifm-button-background-color: var(--color-primary);
+  --ifm-button-border-color: var(--color-primary);
+  --ifm-button-color: var(--color-primary-content);
+  --ifm-button-hover-color: var(--color-primary-content);
+}
+
+.button--primary:hover {
+  filter: brightness(0.94);
+}
+
+.button--secondary {
+  --ifm-button-background-color: var(--color-base-100);
+  --ifm-button-border-color: var(--color-base-300);
+  --ifm-button-color: var(--color-base-content);
+}
+
+.button--secondary,
+.button--secondary:hover {
+  color: var(--color-base-content) !important;
+}
+
+.button--secondary:hover {
+  --ifm-button-background-color: var(--color-base-200);
+}
+
+.button--primary,
+.button--primary:hover {
+  color: var(--color-primary-content) !important;
+}
+
+.tabs__item {
+  border-radius: var(--radius-selector) var(--radius-selector) 0 0;
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------- theme menu */
+
+.cp-theme {
+  position: relative;
+}
+
+.cp-theme__button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-selector);
+  color: var(--color-base-content);
+  cursor: pointer;
+  display: flex;
+  height: 2.25rem;
+  justify-content: center;
+  width: 2.25rem;
+}
+
+.cp-theme__button:hover,
+.cp-theme__button[aria-expanded='true'] {
+  background: var(--color-base-200);
+}
+
+.cp-theme__menu {
+  background: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  box-shadow: 0 8px 24px color-mix(in oklab, black 12%, transparent);
+  min-width: 11rem;
+  padding: 0.35rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  z-index: 50;
+}
+
+.cp-theme__item {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-selector);
+  color: var(--color-base-content);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: 0.9375rem;
+  gap: 0.6rem;
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  width: 100%;
+}
+
+.cp-theme__item:hover {
+  background: var(--color-base-200);
+}
+
+.cp-theme__item[aria-checked='true'] {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.cp-theme__check {
+  margin-left: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------- diagrams */
+
+.docusaurus-mermaid-container {
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
+.docusaurus-mermaid-container svg {
+  font-family: var(--ifm-font-family-base) !important;
+}
+
+.docusaurus-mermaid-container .node rect,
+.docusaurus-mermaid-container .node polygon,
+.docusaurus-mermaid-container .node circle,
+.docusaurus-mermaid-container rect.actor,
+.docusaurus-mermaid-container .cluster rect {
+  fill: var(--color-base-200) !important;
+  stroke: var(--color-base-300) !important;
+  stroke-width: 1px !important;
+  rx: 8px;
+  ry: 8px;
+}
+
+.docusaurus-mermaid-container .nodeLabel,
+.docusaurus-mermaid-container .label,
+.docusaurus-mermaid-container text.actor,
+.docusaurus-mermaid-container .actor tspan,
+.docusaurus-mermaid-container .messageText,
+.docusaurus-mermaid-container .noteText,
+.docusaurus-mermaid-container .edgeLabel {
+  color: var(--color-base-content) !important;
+  fill: var(--color-base-content) !important;
+}
+
+.docusaurus-mermaid-container .edgeLabel,
+.docusaurus-mermaid-container .edgeLabel rect {
+  background-color: var(--color-base-100) !important;
+  fill: var(--color-base-100) !important;
+}
+
+.docusaurus-mermaid-container .edgePath path,
+.docusaurus-mermaid-container .flowchart-link,
+.docusaurus-mermaid-container .messageLine0,
+.docusaurus-mermaid-container .messageLine1,
+.docusaurus-mermaid-container .actor-line {
+  stroke: color-mix(in oklab, var(--color-base-content) 55%, transparent) !important;
+}
+
+.docusaurus-mermaid-container marker path {
+  fill: color-mix(in oklab, var(--color-base-content) 55%, transparent) !important;
+  stroke: color-mix(in oklab, var(--color-base-content) 55%, transparent) !important;
+}
+
+.docusaurus-mermaid-container .note {
+  fill: color-mix(in oklab, var(--color-primary) 12%, var(--color-base-100)) !important;
+  stroke: color-mix(in oklab, var(--color-primary) 40%, transparent) !important;
+}
+
+.docusaurus-mermaid-container .labelBkg,
+.docusaurus-mermaid-container .edgeLabel p {
+  background-color: var(--color-base-100) !important;
+}
+
+.docusaurus-mermaid-container svg {
+  max-width: min(100%, 540px);
+  height: auto;
+}
