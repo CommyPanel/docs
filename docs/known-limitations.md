@@ -25,6 +25,7 @@ CommyPanel is pre-1.0 and under heavy development. What you should know before y
 - Backups copied to S3 storage are **not read back** by the panel. Download and load them by hand, as [Backups](operating/backups.md) shows. Restoring onto a **new server** is manual.
 - App volumes are archived on demand and restored by hand.
 - **pgAdmin is large** (about 600 MB), so the first time you open a PostgreSQL database it takes a while to download.
+- **Remote access** to a database opens a real port on the internet. It needs your firewall and hosting provider to allow the port, does not work through Cloudflare's proxy, and the address list and TLS are all that protects the login. If the server's address changes, open it again so the certificate matches.
 - The database tools are served on their **own port** (2053). Browsers share cookies between ports, so a flaw inside a tool could still fill your browser's cookie storage for that host. A separate host name would remove this, and is waiting on wildcard certificates.
 
 ## Safe deployments

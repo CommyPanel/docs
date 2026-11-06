@@ -38,7 +38,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Databases',
       collapsed: false,
-      items: ['databases/servers-and-links', 'databases/tools'],
+      items: ['databases/servers-and-links', 'databases/tools', 'databases/remote-access'],
     },
     {
       type: 'category',

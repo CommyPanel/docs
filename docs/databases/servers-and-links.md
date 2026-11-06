@@ -11,7 +11,7 @@ CommyPanel runs **MariaDB, MySQL and PostgreSQL** servers for your apps, as cont
 
 **Add server** takes a name, the database (MariaDB, MySQL or PostgreSQL) and a version. The server runs from the official image, downloaded from Docker Hub, so the first start can take a few minutes; the page updates by itself. If it fails, the page says why and offers **Try again**.
 
-- **It is never reachable from the internet.** No port is published. Only an app that is linked to one of its databases can reach it.
+- **It is not reachable from the internet unless you open it.** No port is published. Only an app that is linked to one of its databases can reach it, until you use [Remote access](remote-access.md).
 - Its data is kept on this server, in `/var/lib/commypanel/databases/<server>`, and survives restarts and upgrades. The server has a memory limit of 1 GB by default (`DATABASE_MEMORY_MB`).
 - You can **stop**, **start** and **restart** a server. **Delete server** removes it together with the data of every database on it; it asks you to type its name and your password, and is refused while an app uses one of its databases.
 - Versions offered: MariaDB 11.4 and 10.11, MySQL 8.4 and 8.0, PostgreSQL 17, 16 and 15.
