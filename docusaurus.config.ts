@@ -13,11 +13,10 @@ const config: Config = {
     v4: true,
   },
 
-  // The site is served from the root of its address. On GitHub Pages that is
-  // https://commypanel.github.io/ (a repository named commypanel.github.io in the
-  // organization) or your own domain, set in `url` below and in static/CNAME.
+  // GitHub Pages address. When the docs get a domain of their own, set `url`
+  // to it and `baseUrl` to '/'.
   url: 'https://commypanel.github.io',
-  baseUrl: '/',
+  baseUrl: '/docs/',
 
   organizationName: 'CommyPanel',
   projectName: 'docs',

@@ -31,7 +31,7 @@ The docs are built with [Docusaurus](https://docusaurus.io) and use the panel's 
 git clone https://github.com/CommyPanel/docs.git
 cd docs
 npm install
-npm start          # http://localhost:3000/, reloads as you edit
+npm start          # http://localhost:3000/docs/, reloads as you edit
 npm run build      # a production build; broken links fail it
 ```
 
