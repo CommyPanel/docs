@@ -21,6 +21,7 @@ const sidebars: SidebarsConfig = {
         'apps/environment-variables',
         'apps/release-command',
         'apps/volumes',
+        'apps/safe-deployments',
         'apps/lifecycle',
         'apps/logs-and-terminal',
         'apps/networks',

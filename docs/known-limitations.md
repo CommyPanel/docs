@@ -27,6 +27,12 @@ CommyPanel is pre-1.0 and under heavy development. What you should know before y
 - **pgAdmin is large** (about 600 MB), so the first time you open a PostgreSQL database it takes a while to download.
 - The database tools are served on their **own port** (2053). Browsers share cookies between ports, so a flaw inside a tool could still fill your browser's cookie storage for that host. A separate host name would remove this, and is waiting on wildcard certificates.
 
+## Safe deployments
+
+- Request statistics, the watch and gradual rollouts judge **errors and response times** only, and only for requests that pass nginx. Too little traffic means a watch ends without a verdict and a rollout asks you.
+- A gradual rollout runs **two versions at once** against the same database and volumes, and keeps visitors on one version with a cookie. Clients that refuse cookies can switch between versions.
+- The statistics are kept **in memory for one hour** and start empty after the agent restarts.
+
 ## Integrations and operations
 
 - **GitHub Enterprise Server** is not supported. GitLab, Gitea and Bitbucket work with deploy keys or tokens, without one-click connection.

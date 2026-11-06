@@ -42,4 +42,4 @@ At any step before the switch, **the old container keeps serving** and nothing c
 
 ## What it does not do
 
-It does not roll back volume data or databases, and it does not make a broken app healthy. If the new version starts but misbehaves in ways the health check cannot see, roll back from the **Deployments** tab.
+It does not roll back volume data or databases, and it does not make a broken app healthy. If the new version starts but misbehaves in ways the health check cannot see, CommyPanel [watches it after the switch](../apps/safe-deployments.md) and rolls back by itself when it is clearly worse; you can also roll back from the **Deployments** tab, or release it to your visitors [gradually](../apps/safe-deployments.md#gradual-rollout).

@@ -56,6 +56,8 @@ curl -sS "$BASE/api/v1/apps/shop/deployments/12?log=1" \
   -H "Authorization: Bearer $TOKEN" -H "Accept: application/json"
 ```
 
+A deployment can also have the status `rollout` (a [gradual rollout](../apps/safe-deployments.md#gradual-rollout) is proving it, `finished` is `false`) or `rolled_back` (it went live and was [rolled back](../apps/safe-deployments.md#watch-after-the-switch) by itself, `succeeded` is `false`). The watch runs after the release went live, so a job that stops at the first `succeeded: true` can miss a rollback minutes later.
+
 ## GitHub Actions
 
 Store the token as a repository secret (`COMMYPANEL_TOKEN`) and the panel address as a variable.
