@@ -10,7 +10,7 @@ You need Node.js 20 or newer.
 
 ```bash
 npm install
-npm start          # http://localhost:3000/docs/ , reloads as you edit
+npm start          # http://localhost:3000/ , reloads as you edit
 ```
 
 Build the site the way CI does (broken links fail the build):
@@ -43,7 +43,14 @@ The themes are: **light** (`data-theme="light"`), **dim** (`data-theme="dark"`) 
 
 ## Publishing
 
-Pushing to `main` builds the site and publishes it to GitHub Pages (enable it under Settings → Pages → Source: GitHub Actions). The site is served at `https://commypanel.github.io/docs/`. When the docs get a domain of their own, set `url` and `baseUrl` in `docusaurus.config.ts`.
+Pushing to `main` builds the site and publishes it to GitHub Pages (enable it under Settings → Pages → Source: GitHub Actions).
+
+The site is built to be served from the **root** of its address (`baseUrl: '/'`). GitHub Pages serves a repository named `docs` under `/docs/`, so to get the root address use one of:
+
+- **A custom domain** (free): in Settings → Pages set the domain, create the DNS record GitHub shows, and set `url` in `docusaurus.config.ts` to `https://your-domain`. Keep `baseUrl: '/'`.
+- **A repository named `commypanel.github.io`** in the organization: its Pages site is served at `https://commypanel.github.io/`. Rename this repository (Settings → General) and update `editUrl` and `projectName` in `docusaurus.config.ts`.
+
+Served under `/docs/` without one of those, pages load but the styles and links break.
 
 ## Contributing
 
