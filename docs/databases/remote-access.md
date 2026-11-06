@@ -17,9 +17,9 @@ Open it on the server's page, in the **Remote access** card.
 
 ## How it works
 
-- The port is a **random** one from `20000` to `29999`, never the database's usual port. Change the range with `COMMYPANEL_DB_REMOTE_PORTS` (for example `30000-39999`).
+- The port is a **random** one from `20000` to `29999`, never the database's usual port. The dialog shows the range, so you can open it in your firewall for your own addresses beforehand. Change the range with `COMMYPANEL_DB_REMOTE_PORTS` (for example `30000-39999`).
 - The agent opens the port itself and checks the **source address** of every connection against your list. A connection from anywhere else is closed without a single byte in reply.
-- **TLS is required.** The agent makes a certificate authority for the server and a certificate for its public addresses, and the database uses it. A client that does not ask for TLS is refused. The first time you open a server, it **restarts once** to switch TLS on (apps reconnect by themselves). Download the authority's certificate (**Certificate (ca.pem)**) and give it to your client, so it can check it is talking to your server.
+- **TLS is required.** The agent makes a certificate authority for the server and a certificate for its public addresses, and the database uses it. A client that does not ask for TLS is refused. The first time you open a server, it **restarts once** to switch TLS on, because TLS is a start-up setting of the database. The dialog explains this and asks you to confirm; apps linked to the server lose their connection for a few seconds and reconnect by themselves. It happens once per server, and again only if the server's public address changes. Download the authority's certificate (**Certificate (ca.pem)**) and give it to your client, so it can check it is talking to your server.
 - The panel shows the connection address and a ready command for your engine, for example:
 
 ```bash
