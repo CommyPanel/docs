@@ -13,12 +13,11 @@ npm install
 npm start          # http://localhost:3000/docs/ , reloads as you edit
 ```
 
-Build the site the way CI does (broken links fail the build):
+Before you open a pull request, build the site the way CI does. Broken links fail the build.
 
 ```bash
-npm run build
-npm run serve      # serves the build
 npm run typecheck
+npm run build
 ```
 
 ## Writing
@@ -28,7 +27,7 @@ npm run typecheck
 - Link to other pages with relative file paths (`../apps/volumes.md#anchor`), not URLs, so broken links are caught.
 - Write for the person using the panel: what to click, what happens, what to watch out for. Do not document things that do not exist yet; list them under *Known limitations*.
 - `docs/reference/permissions.md` is generated from the panel's permission list. Regenerate it when permissions change instead of editing it by hand.
-- Release notes in `docs/releases/` are copied from the panel repository (`docs/releases/`).
+- Release notes in `docs/releases/` are copied from the panel repository.
 
 ## The theme
 
@@ -39,11 +38,7 @@ npm run typecheck
 | `src/theme/ColorModeToggle` | The theme menu: System, Light, Dim and Dark (dark is true black) |
 | `src/pages/index.tsx` | The landing page |
 
-The themes are: **light** (`data-theme="light"`), **dim** (`data-theme="dark"`) and **dark** (`data-theme="dark"` with `data-tone="black"`), matching the panel's `commy-light`, `commy-dim` and `commy-dark`.
-
-## Publishing
-
-Pushing to `main` builds the site and publishes it to GitHub Pages (enable it under Settings → Pages → Source: GitHub Actions). The site is served at `https://commypanel.github.io/docs/`. When the docs get a domain of their own, set `url` and `baseUrl` in `docusaurus.config.ts`.
+The themes are **light** (`data-theme="light"`), **dim** (`data-theme="dark"`) and **dark** (`data-theme="dark"` with `data-tone="black"`), matching the panel's `commy-light`, `commy-dim` and `commy-dark`.
 
 ## Contributing
 
