@@ -32,6 +32,10 @@ It is **pre-1.0 and under heavy development**. It is a good fit for side project
 
 It controls Docker and nginx, and takes over nginx's default site, so use a server you are happy to dedicate to your apps. Other containers keep running if they are not named like CommyPanel's, but CommyPanel does not manage them.
 
+## Can I connect to my database from my own computer?
+
+Yes, for a limited time and from addresses you choose: see [Remote access to a database](databases/remote-access.md). It needs TLS, a firewall rule for the port, and the server's own address (not a Cloudflare-proxied name). For anything permanent, a VPN or an SSH tunnel is safer.
+
 ## What happens to my apps if the panel goes down?
 
 Nothing. Your apps run as Docker containers behind nginx, and keep running and serving traffic if the panel is stopped, upgraded or removed.

@@ -17,8 +17,8 @@ The web application runs as an unprivileged user, its code is owned by root and 
 - Every input (names, images, ports, paths, domains) is checked against allow-lists **inside the agent**, independent of the panel.
 - Commands run as **argument lists**, never through a shell.
 - **nginx** configuration is rendered from templates and validated fields, never accepted as text from the panel, and applied only if `nginx -t` passes. The one user-written part, [custom directives](../apps/custom-nginx.md), is parsed against an allow-list and never pasted into a file.
-- It only listens on a local **Unix socket** and checks the caller's identity.
-- Its own state (TLS keys, the ACME account key, scratch files, the record of dumps it made) lives in a folder only root can change, outside what the panel can write.
+- It listens on local **Unix sockets** and checks the caller's identity. The one exception is [remote access to a database](../databases/remote-access.md): only while a person has opened it, the agent holds a public port for that one database, a fixed-purpose proxy that accepts only the listed addresses, requires TLS from the client, and closes itself at the end time. Nothing else is ever offered on the network.
+- Its own state (TLS keys, the certificate authorities of database servers, the ACME account key, scratch files, the record of dumps it made) lives in a folder only root can change, outside what the panel can write.
 
 ## Containers are constrained
 

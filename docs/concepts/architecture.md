@@ -26,7 +26,7 @@ A Laravel and React application with its own small **SQLite** databases (one for
 
 ### The agent
 
-`commypanel-agent` is a small Go program that runs as root. It listens only on a **Unix socket** that the `commypanel` user can use, never on the network, and it checks who is calling. It accepts a **fixed list of typed actions** (run a container, write an nginx site, request a certificate, create a database, ...), validates every input against allow-lists on its own, runs commands as argument lists and never through a shell, and renders configuration from templates. It has no database and no business logic. See [Security](security.md).
+`commypanel-agent` is a small Go program that runs as root. It listens on **Unix sockets** that the `commypanel` user (or nginx, for the terminal, the database tools and request statistics) can use, and it checks who is calling. It opens a TCP port only while someone has opened a database server to the internet, for that one purpose. It accepts a **fixed list of typed actions** (run a container, write an nginx site, request a certificate, create a database, ...), validates every input against allow-lists on its own, runs commands as argument lists and never through a shell, and renders configuration from templates. It has no database and no business logic. See [Security](security.md).
 
 ### nginx
 

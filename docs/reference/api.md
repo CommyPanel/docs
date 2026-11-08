@@ -46,7 +46,7 @@ A **deployment**:
 | Field | Meaning |
 |---|---|
 | `number` | The release number |
-| `status` | `queued`, `building`, `starting`, `active`, `superseded`, `failed` or `stopped` |
+| `status` | `queued`, `building`, `starting`, `rollout` (a gradual rollout is proving it), `active`, `superseded`, `rolled_back` (it went live and was rolled back by itself), `failed` or `stopped` |
 | `stage` | `fetch`, `build`, `release`, `start`, `health`, `switch` or `done` |
 | `finished` | `true` once it is over, whatever the result |
 | `succeeded` | `true` if it went live (it is `active`, or was and has been replaced) |

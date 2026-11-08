@@ -49,12 +49,14 @@ sudo journalctl -u commypanel-agent -n 50   # why (use the unit that is down)
 - **The domain stays pending.** DNS can take a few minutes to spread. Check the records the page shows. A stale **AAAA** record pointing elsewhere is reported as a problem. Behind Cloudflare's proxy, switch the record to **DNS only** until the certificate has been issued.
 - **The certificate was not issued.** The page shows the reason. Check that port **80** is open and reachable from the internet, that every name on the certificate points at this server, and that you accepted the Let's Encrypt terms under **Domains → HTTPS**. Let's Encrypt limits how often you can retry.
 - **Browsers distrust the certificate.** You are on the **staging** CA (`ACME_STAGING=true`). Production installs use the real one.
+- **A release was rolled back by itself.** Open the deployment: it says why (more errors or slower answers than the release before). If you think it was wrong, press **Go live again**: it goes live with the same image, without a watch. See [Safe deployments](apps/safe-deployments.md).
 - **A visitor sees 502.** The app's container is not running or not healthy. Check **Usage**, **Logs**, and **Server → Docker**.
 
 ## Databases
 
 - **A linked app cannot connect.** Links reach the app when you **Apply changes** or deploy. Check the app received the `DATABASE_*` variables (Environment tab shows the names) and that the database server is running.
 - **The database tool does not open.** Port **2053** must be open in your firewall, and if the panel is behind Cloudflare's proxy, use a port Cloudflare passes (2053 is one). The first pgAdmin opening downloads about 600 MB. See [phpMyAdmin and pgAdmin](databases/tools.md).
+- **I cannot connect to a database I opened to the internet.** Check, in this order: the port shown on the server's page is open in your firewall and at your hosting provider for your address; you connect to the server's own address, not a Cloudflare-proxied name; your address is on the list (it is the public one, which may differ from your computer's); your client asks for TLS (`sslmode=require` or stricter, `--ssl-mode=REQUIRED`); and it has not expired. See [Remote access](databases/remote-access.md).
 - **A restore failed.** The new database stays, marked failed with the reason. Delete it and try again, or load the dump by hand (see [Backups](operating/backups.md#copy-backups-off-the-server)).
 
 ## Upgrading

@@ -44,6 +44,7 @@ This page is generated from the permission list in the panel's code, so it match
 | `databases.view`<br/>**View databases** | See the database servers, the databases on them and which apps use them. Passwords and connection strings are not shown. |
 | `databases.manage`<br/>**Manage databases** | Create, start, stop and delete database servers, and create, drop and change the password of databases on them. Deleting a server deletes the data of every database on it. |
 | `databases.credentials`<br/>**See database passwords** | Show a database's password and connection string. Asks for the password unless it was confirmed recently, and every time it is shown is recorded in the audit log. |
+| `databases.remote`<br/>**Open databases to the internet** | Make a database server reachable from chosen IP addresses on the internet for a limited time (or without end), and close it again. Anyone who holds a database password and comes from an allowed address can then connect. Asks for the password unless it was confirmed recently, and every change is recorded in the audit log as a high-risk action. |
 | `databases.tools`<br/>**Open databases in phpMyAdmin or pgAdmin** | Open a database in phpMyAdmin (MySQL, MariaDB) or pgAdmin (PostgreSQL), logged in as that database's own user: read, change and delete its data, run SQL and import or export dumps. Asks for the password unless it was confirmed recently, and every opening is recorded in the audit log. Treat it like the database's password. |
 
 ## Server

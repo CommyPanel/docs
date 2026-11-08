@@ -41,6 +41,10 @@ Dangerous actions ask you to confirm your password again, unless you did so rece
 
 **Settings → Audit log** records who did what, when and from where: sign-ins and sign-outs, two-factor changes, users and roles, app and database changes, deployments and their results (including those started by a webhook or an API token), domain and certificate events, backups and downloads, terminal and database-tool sessions, and changes to settings. Secrets, tokens, passwords and environment values are never written to it.
 
+Entries are coloured by how much they matter: **red** for high-risk actions (opening a database to the internet or changing who may connect, deleting a database server, a database, an app or a user, turning off two-factor authentication), **orange** for sensitive ones (a password or connection shown, a download, a terminal or database tool opened, access or settings changed, a failure or a rollback) and plain for the rest.
+
+You can **filter** the log by time (today, last 7 days, last month, last year or your own dates) and by risk (high risk, sensitive, routine), and **search** the person, the action or the IP address. The search takes IPv4 and IPv6 addresses, whole or in part, in any spelling (capitals, expanded zeros, brackets), and several words must all match.
+
 The log is read-only. Reading it needs `audit.view`.
 
 ## Sessions
