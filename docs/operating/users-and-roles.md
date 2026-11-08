@@ -15,6 +15,12 @@ There is **no public registration**, and after setup there is no way to create a
 
 People with `users.create` add more accounts under **Users**. Each account has one **role**. Setting a new password for an account, or deleting it, ends that user's open sessions, so a stolen session stops working.
 
+## Language
+
+The panel is available in **English, French, German, Spanish, Russian, Ukrainian and Turkish**. All of them are installed with the panel. The first-run setup page has a language box (it starts with your browser's language when the panel offers it, otherwise English), and that becomes the first admin's language. When you add a user you choose their language, and it starts as your own. Everyone can change theirs in **Settings → Appearance**; it affects only their own account. The login page uses the browser's language, with a box to change it for that visit.
+
+Only the panel's interface is translated. The command line, the documentation, the audit-log action codes and the text saved by background work (such as a deployment's error text and build log) stay in English. English is the fallback: anything not translated yet shows in English. Anyone can improve a translation or add a language; see [Contributing](../contributing.md).
+
 ## Roles and permissions
 
 A **role** is a named set of **permissions** (see the [full list](../reference/permissions.md)). Every route and action in the panel checks one.

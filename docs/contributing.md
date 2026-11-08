@@ -13,6 +13,8 @@ CommyPanel is open source under the **MIT license**, and contributions of every 
 - **Improve these docs.** Every page has an **Edit this page** link at the bottom. The docs live in their own repository, [CommyPanel/docs](https://github.com/CommyPanel/docs).
 - **Pick a starter task.** Issues labelled [`good first issue`](https://github.com/CommyPanel/panel/labels/good%20first%20issue) are small and say where to look.
 
+- **Translate the panel.** The interface is available in seven languages, and adding or improving one is editing a JSON file. See *Translating the panel* in the contributing guide.
+
 ## The full guide
 
 The contributing guide in the panel repository covers how to run the project on your laptop (no Docker or server needed, the host is faked), the checks to run, what a good pull request looks like, the security-sensitive areas, and the **terms of contribution**:

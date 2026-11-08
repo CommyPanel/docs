@@ -22,7 +22,7 @@ Run this as root:
 curl -fsSL https://github.com/CommyPanel/panel/releases/latest/download/install.sh | sudo bash
 ```
 
-The installer downloads the release, **checks its SHA-256 checksum** and stops if it does not match, then installs everything and prints a **one-time setup link**. Open it, create your admin account, and you are done. The link works once and expires after an hour; run `sudo commypanel setup-url` for a new one.
+The installer downloads the release, **checks its SHA-256 checksum** and stops if it does not match, then installs everything and prints a **one-time setup link**. Open it, choose your language, create your admin account, and you are done. The link works once and expires after an hour; run `sudo commypanel setup-url` for a new one.
 
 Your browser will warn about the panel's certificate. It is self-signed until you give the panel a domain of its own (see [Domains and HTTPS](../domains/domains-and-https.md#the-panels-own-domain)).
 
