@@ -10,8 +10,8 @@ Three kinds of data matter on a CommyPanel server. Each has its own backup, and 
 | What | Backed up | Kept on the server | Restore |
 |---|---|---|---|
 | **The panel's database** (apps, domains, users, audit log, encrypted secrets) | nightly at 03:30, or on demand | newest 7 (`BACKUPS_KEEP`) | `sudo commypanel restore FILE` |
-| **Each database** on a database server | nightly at 04:00, or on demand | newest 7 of each (`BACKUPS_KEEP_DATABASES`) | the **Restore** button, into a new database |
-| **App volumes** | only when you ask | newest 3 of each (`BACKUPS_KEEP_VOLUMES`) | by hand with `tar` |
+| **Each database** on a database server | nightly at 04:00, or on demand | newest 7 of each (`BACKUPS_KEEP_DATABASES`) | **Restore** into a new database, or **Restore over…** an existing one |
+| **App volumes** | on demand, or nightly if you switch it on for a volume | newest 3 of each (`BACKUPS_KEEP_VOLUMES`) | the **Restore** button on the app's Volumes tab |
 
 ## The panel
 
@@ -23,11 +23,15 @@ To restore, on the server: `sudo commypanel restore FILE`, with the name of a ba
 
 ## Databases
 
-Every database on a running server is dumped each night at 04:00, and from the **Back up** button next to it, with the engine's own tool, to one compressed file in `/var/lib/commypanel/backups/databases/<server>/`. The newest 7 of each are kept (`BACKUPS_KEEP_DATABASES`). The server page lists them; download and delete need a recent password, and downloads are audited. To load a dump back, press **Restore** next to it. It is loaded into a **new** database (you choose its name, such as `shop_restored`), so nothing that exists is changed or overwritten. The new database has its own user and password, shows "Restoring" until it is done, and if loading fails it stays, marked as failed with the reason, so you can look at it or delete it. When it looks right, link it to the app on its **Links** tab, deploy again, and delete the old database. The agent only loads dumps it made itself: it remembers a checksum of each dump it makes and refuses any other file, or one that was changed since, so a restore cannot be used to run someone else's SQL.
+Every database on a running server is dumped each night at 04:00, and from the **Back up** button next to it, with the engine's own tool, to one compressed file in `/var/lib/commypanel/backups/databases/<server>/`. The newest 7 of each are kept (`BACKUPS_KEEP_DATABASES`). The server page lists them; download and delete need a recent password, and downloads are audited. To load a dump back, press **Restore** next to it. It is loaded into a **new** database (you choose its name, such as `shop_restored`), so nothing that exists is changed or overwritten. The new database has its own user and password, shows "Restoring" until it is done, and if loading fails it stays, marked as failed with the reason, so you can look at it or delete it. When it looks right, link it to the app on its **Links** tab, deploy again, and delete the old database.
+
+**Restore over…** replaces an **existing** database instead. Choose the database (it starts as the one the dump came from), read which apps use it, tick that you understand everything in it is replaced, type its name, and confirm your password. CommyPanel first takes a **safety dump** of the database as it is now (it stays in the list), then drops and recreates the database and loads the dump. The dump's engine must match the server: a MySQL dump is not loaded into MariaDB. If loading fails, the safety dump is put back and the page says so; if even that fails, the message names the safety dump so you can load it by hand. Apps linked to the database see errors while it runs. Replacing is recorded in the audit log as a high-risk action. The agent only loads dumps it made itself: it remembers a checksum of each dump it makes and refuses any other file, or one that was changed since, so a restore cannot be used to run someone else's SQL.
 
 ## Volumes
 
-**Backing up a volume.** Below the volumes, the **Backups** card has a **Back up** button for each volume. It makes one compressed archive (a gzipped tar) of the volume's folders and files in `/var/lib/commypanel/backups/volumes/<app>/`, in the background, since a large volume takes a while; the newest 3 of each are kept (`BACKUPS_KEEP_VOLUMES`). It is only made when you ask (nothing is backed up by itself), because volumes can be large. Links, pipes, sockets and devices are left out, owners are kept as numbers so files go back to the same users, and a volume over 50 GB is refused. Downloading or deleting an archive needs your password and is recorded. The archives stay on this server, so copy them somewhere else now and then. To put one back, stop the app and run `tar -xzpf FILE -C /var/lib/commypanel/volumes/<app>/<folder>` as root on the server; CommyPanel never overwrites a volume that may be in use. Archives are deleted with the app.
+**Backing up a volume.** The **Backups** card has a **Back up** button for each volume, and the Volumes tab has a switch **Archive every night** for each volume (off by default; the nightly run is at 03:30 and keeps the newest 3). It makes one compressed archive (a gzipped tar) of the volume's folders and files in `/var/lib/commypanel/backups/volumes/<app>/`, in the background, since a large volume takes a while; the newest 3 of each are kept (`BACKUPS_KEEP_VOLUMES`). Volumes are not archived by themselves unless you switch that on, because they can be large. Links, pipes, sockets and devices are left out, owners are kept as numbers so files go back to the same users, and a volume over 50 GB is refused. Downloading or deleting an archive needs your password and is recorded. The archives stay on this server, so copy them somewhere else now and then. Archives are deleted with the app.
+
+**Restoring a volume.** Press **Restore** next to an archive, read what happens, type the volume's name and confirm your password. CommyPanel takes a safety archive of the volume as it is now, stops the app, replaces the volume's files with the archive (unpacked next to the folder first and swapped in at the end, so a failed unpack leaves the old files), and starts the app again, also when the restore failed. The agent only restores archives it made itself, and refuses while a container still uses the volume. **Archives made before 0.8.0 cannot be restored from the page** because they were not recorded; make a new archive, or unpack the old one by hand with `tar -xzpf FILE -C /var/lib/commypanel/volumes/<app>/<folder>` as root with the app stopped.
 
 ## Copy backups off the server
 
@@ -50,6 +54,10 @@ How it behaves:
 - The address must be https and cannot be this server itself or a link-local address; a storage in your private network is fine.
 - One upload is limited to **5 GB** (a limit of S3), so a bigger file is not copied and the page says so.
 - This is the one place besides update checks where the panel contacts the outside by itself, and only once you switch it on.
+
+### See what is stored there
+
+Once the copy is on, **Settings → Backups** has a **Copies on remote storage** card that lists what is in the bucket (panel backups, database dumps by server, volume archives by app, newest first, up to 500) and lets you download a file through the panel (it asks for your password and is audited). Nothing is restored from it automatically: the agent loads only what it made on this server. To recover a lost server, see below.
 
 ### Getting a backup back from the storage
 

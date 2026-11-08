@@ -37,7 +37,7 @@ CommyPanel is pre-1.0 and under heavy development. What you should know before y
 ## Integrations and operations
 
 - **GitHub Enterprise Server** is not supported. GitLab, Gitea and Bitbucket work with deploy keys or tokens, without one-click connection.
-- Deployment messages are **one webhook** for the whole panel: no email, no per-app targets.
+- **Alerts have no email**: they go to Slack, Discord, Teams, ntfy, Telegram or a JSON webhook (up to 10 targets). You can mute one app, but not choose different targets per app.
 - You cannot upgrade from the UI; you run `sudo commypanel upgrade`.
 - Settings such as the app port, health path and resource limits apply from the **next full deployment**. Environment variables, volumes and links can be [applied without one](apps/lifecycle.md#applying-changes-without-a-deployment).
 - The panel has **not been run on a wide range of real servers** yet. Please report what you find.

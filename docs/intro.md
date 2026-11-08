@@ -12,7 +12,7 @@ CommyPanel is an open-source, self-hosted **server control panel**. You install 
 - **Connect domains**: it shows you which DNS records to create, checks them, and issues and renews **Let's Encrypt** certificates.
 - **Run databases**: PostgreSQL, MySQL and MariaDB in containers, linked to your apps over private networks, backed up nightly, and opened in phpMyAdmin or pgAdmin with one click, or opened to chosen IP addresses on the internet for a limited time, with TLS.
 - **Deploy safely**: the new release is watched after it goes live and rolled back by itself if it is clearly worse, and you can roll it out to your visitors [gradually](apps/safe-deployments.md).
-- **Operate it safely**: users, roles and permissions, two-factor authentication, an audit log you can filter and search, API tokens for your pipelines, and messages to Slack or Discord when a deployment finishes.
+- **Operate it safely**: users, roles and permissions, two-factor authentication, an audit log you can filter and search, API tokens for your pipelines, and alerts to Slack, Discord, Teams, ntfy or Telegram when an app goes down, a certificate fails, the disk fills or a backup fails.
 
 ![The CommyPanel dashboard](/img/screenshots/dashboard.png)
 

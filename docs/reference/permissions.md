@@ -54,7 +54,7 @@ This page is generated from the permission list in the panel's code, so it match
 | `backups.view`<br/>**View backups** | See the list of the panel's backups, when they were made and how big they are. |
 | `backups.manage`<br/>**Manage backups** | Take a backup now, download one and delete one. A backup holds everything in the panel's database, including the encrypted secrets of apps and databases, so downloading asks for the password and is recorded in the audit log. |
 | `github.manage`<br/>**Connect GitHub** | Create the panel's GitHub App, install it on an account and disconnect it. The app can read the code of the repositories you give it access to on GitHub, and anyone who may create apps can then deploy those repositories. |
-| `notifications.manage`<br/>**Manage deployment messages** | Choose where the result of deployments is sent (Slack, Discord or any webhook), send a test message and switch it off. The address is stored encrypted and never shown again; the messages hold the app, commit and error, never logs or secrets. |
+| `notifications.manage`<br/>**Manage notifications** | Choose where alerts are sent (Slack, Discord, Teams, ntfy, Telegram or any webhook) and which events each target gets, send a test message and switch a target off. Addresses are stored encrypted and never shown again; messages say what happened and link to the panel, never logs or secrets. |
 | `server.view`<br/>**View the server** | See host resources, service states, Docker and nginx status. |
 | `server.manage`<br/>**Manage Docker and nginx** | Reload nginx, test its configuration, remove unused images and read container logs. |
 
