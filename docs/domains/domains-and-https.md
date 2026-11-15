@@ -7,7 +7,7 @@ description: "Connect a domain to an app, see the DNS records to create, and get
 
 ## Adding a domain
 
-Domains belong to an app. Open the app's **Domains & SSL** tab and add a domain or subdomain. The global **Domains** page lists every domain on the server (read only).
+Domains belong to an app. Open the app's **Domains & SSL** tab and add a domain or subdomain. The global **Domains** page lists every domain on the server (read only). When an app is deleted its domains stay on that page with no app; the **Use a free domain** tab of the add-domain form (in the wizard and on an app's tab) lists them, so a new app can take one without typing it again.
 
 CommyPanel then shows the DNS records to create and checks them:
 
