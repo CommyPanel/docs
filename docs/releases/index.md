@@ -9,6 +9,7 @@ Each release has notes that say **what is new**, **what to do before you upgrade
 
 | Version | Highlights |
 |---|---|
+| [0.9.0](v0.9.0.md) | Ready-made apps (Meilisearch, Typesense, Grafana, Elasticsearch, Kibana), the encryption key page, active sessions, audit log export, signed releases |
 | [0.8.0](v0.8.0.md) | The panel in seven languages, alerts for apps, certificates, disk, backups and databases to six kinds of targets, restore over a database or a volume, nightly volume backups, remote copies list |
 | [0.7.0](v0.7.0.md) | Safe deployments (automatic rollback, gradual rollouts), remote access to databases, audit log colours |
 | [0.6.0](v0.6.0.md) | Database tools (phpMyAdmin, pgAdmin), API tokens, deployment messages, GitHub connection, Apply changes without redeploying |

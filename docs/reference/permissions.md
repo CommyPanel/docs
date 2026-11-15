@@ -27,6 +27,7 @@ This page is generated from the permission list in the panel's code, so it match
 | `apps.deactivate`<br/>**Deactivate and activate apps** | Take an app offline without deleting it, and bring it back. |
 | `apps.delete`<br/>**Delete apps** | Permanently delete an app with its releases, images, domains, certificate and variables. |
 | `env.manage`<br/>**Manage environment variables** | Add, replace, import and remove an app's environment variables. These often hold secrets such as database passwords. |
+| `apps.credentials`<br/>**See quick-install passwords** | Show the generated password or key of a quick-install app (Meilisearch, Typesense, Grafana, Elasticsearch, Kibana). Asks for the password unless it was confirmed recently, and every time it is shown is recorded in the audit log. |
 | `apps.links`<br/>**Link apps to databases and other apps** | Let an app reach a database, or another app, over a private network made for that link. A linked app can use the database it is given, and its connection details are added to its environment variables. |
 
 ## Domains

@@ -15,6 +15,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'apps/deploying',
+        'apps/ready-made-apps',
         'apps/private-repositories',
         'apps/github',
         'apps/deploy-on-push',
