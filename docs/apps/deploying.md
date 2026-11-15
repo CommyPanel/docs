@@ -41,7 +41,7 @@ Your app must listen on the port CommyPanel gives it, which it passes as the **`
 2. **Build the image**: one build at a time on the server, with CPU and memory limits.
 3. **Release command** (optional): run once in a fresh container, for example migrations. See [Release command](release-command.md).
 4. **Start**: the new container starts next to the old one.
-5. **Health check**: CommyPanel asks your health check path until the app answers (anything below 500 counts), for up to 60 seconds.
+5. **Health check**: CommyPanel asks your health check path until the app answers (anything below 500 counts), for up to 60 seconds by default; the app's **Health check timeout** (Settings tab) changes it, from 10 to 1800 seconds.
 6. **Go live**: nginx is pointed at the new container and reloaded gracefully. The old container then stays for a few minutes while CommyPanel [watches the new release](safe-deployments.md) and rolls back by itself if it is clearly worse, and then stops. With a [gradual rollout](safe-deployments.md#gradual-rollout) turned on, only a share of the visitors gets the new release at first.
 
 If any step fails, **the old version keeps serving** and the deployment is marked failed with the reason. See [Zero-downtime deployments](../concepts/zero-downtime.md) for the details.

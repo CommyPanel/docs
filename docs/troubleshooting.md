@@ -31,7 +31,7 @@ sudo journalctl -u commypanel-agent -n 50   # why (use the unit that is down)
 ## Deployments
 
 - **Read the log first.** The deployment page shows every step. The failure and its reason are at the end.
-- **"The app did not answer on port ... within 60 seconds".** Your app has to listen on the port CommyPanel gives it, from the **`PORT`** environment variable, on **all** addresses (`0.0.0.0`), not only `localhost`. Also check that your **health check path** exists and answers below 500, and that the app really starts: open **Logs** or the Terminal tab on the previous release.
+- **"The app did not answer on port ... within 60 seconds".** (The number is your app's **Health check timeout**: raise it on the app's **Settings** tab, or in the wizard, for apps that start slowly, such as big .NET apps.) Your app has to listen on the port CommyPanel gives it, from the **`PORT`** environment variable, on **all** addresses (`0.0.0.0`), not only `localhost`. Also check that your **health check path** exists and answers below 500, and that the app really starts: open **Logs** or the Terminal tab on the previous release.
 - **"Could not detect the app type".** CommyPanel supports .NET, Go and Node projects, or anything with a `Dockerfile`. Add a Dockerfile, or check that `go.mod`, `package.json` or the `.csproj` is in the repository root.
 - **"Found several Go programs / .NET web projects".** Add a Dockerfile to choose which one runs.
 - **The build runs out of memory or is killed.** Building needs RAM. On a 1 GB server, add swap or upgrade the server.

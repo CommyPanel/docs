@@ -40,7 +40,7 @@ Everything below is optional, and the defaults are fine for most servers. Boolea
 | Setting | Default | What it does |
 |---|---|---|
 | `DEPLOY_PORT_START`, `DEPLOY_PORT_END` | `20000`, `29999` | The local ports (on 127.0.0.1) handed to app containers. |
-| `DEPLOY_HEALTH_TIMEOUT` | `60` | Seconds to wait for a new container to answer its health check. |
+| `DEPLOY_HEALTH_TIMEOUT` | `60` | Seconds to wait for a new container to answer its health check, for apps without their own **Health check timeout**. |
 | `DEPLOY_DRAIN_SECONDS` | `10` | Seconds the old container keeps running after the traffic moved. |
 | `DEPLOY_KEEP_IMAGES` | `3` | Release images kept per app, so rollbacks stay possible. |
 | `DEPLOY_RELEASE_TIMEOUT` | `600` | Seconds a [release command](../apps/release-command.md) may run. |

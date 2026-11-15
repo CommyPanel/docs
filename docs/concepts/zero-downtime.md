@@ -25,7 +25,7 @@ sequenceDiagram
 
 1. **Build** the new image (or reuse one, for a rollback or apply). The old version keeps serving.
 2. **Start** the new container on a different local port, on the app's own network, with the app's variables, volumes and links.
-3. **Health check**: CommyPanel asks the health check path until the app answers (anything below 500), for up to 60 seconds (`DEPLOY_HEALTH_TIMEOUT`).
+3. **Health check**: CommyPanel asks the health check path until the app answers (anything below 500), for up to 60 seconds by default (`DEPLOY_HEALTH_TIMEOUT`), or the app's own **Health check timeout** from its Settings tab.
 4. **Switch**: nginx's upstream is rewritten and reloaded **gracefully**, which does not drop open connections.
 5. **Drain**: the old container keeps running for a few seconds (10 by default, `DEPLOY_DRAIN_SECONDS`) so in-flight requests finish, then it stops.
 

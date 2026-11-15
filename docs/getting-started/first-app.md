@@ -28,6 +28,7 @@ CommyPanel checks that it can read the repository. If it can, you move on. If no
 
 - **App port**: the port your app listens on. CommyPanel passes it to your app as `PORT`; make sure your app reads it.
 - **Health check path**: the path CommyPanel asks (for example `/health`) to know the new version is ready. Any answer below 500 counts.
+- **Health check timeout**: how many seconds a new version gets to answer before the deployment fails (10 to 1800; empty uses the server default of 60). Slow starters may need more.
 - **Memory and CPU limits**: optional. Without them an app gets 512 MB and one core.
 - **Release command**: optional, for example database migrations. See [Release command](../apps/release-command.md).
 
