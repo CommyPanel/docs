@@ -9,6 +9,7 @@ Each release has notes that say **what is new**, **what to do before you upgrade
 
 | Version | Highlights |
 |---|---|
+| [0.9.1](v0.9.1.md) | Search engines are told to ignore every page of the panel |
 | [0.9.0](v0.9.0.md) | Ready-made apps (Meilisearch, Typesense, Grafana, Elasticsearch, Kibana), the encryption key page, active sessions, audit log export |
 | [0.8.2](v0.8.2.md) | A health check timeout per app, and long builds no longer marked interrupted |
 | [0.8.0](v0.8.0.md) | The panel in seven languages, alerts for apps, certificates, disk, backups and databases to six kinds of targets, restore over a database or a volume, nightly volume backups, remote copies list |
