@@ -61,5 +61,5 @@ The panel's PHP code is owned by root and read-only to the panel user. PHP comes
 ## After the install
 
 1. Open the setup link, create the first admin account, and turn on two-factor authentication when it offers.
-2. On the welcome page, accept the Let's Encrypt terms and give the panel a domain of its own if you have one (both can be done later).
+2. On the welcome page, accept the Let's Encrypt terms and give the panel a domain of its own if you have one (both can be done later). The last step shows the panel's **encryption key** (`APP_KEY`): save it in a password manager, because backups never contain it. You can see it again under **Settings → Encryption key** (it needs the `server.key` permission and your password, and every visit is recorded in red in the audit log).
 3. [Deploy your first app](first-app.md).

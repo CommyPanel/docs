@@ -55,6 +55,7 @@ This page is generated from the permission list in the panel's code, so it match
 | `backups.manage`<br/>**Manage backups** | Take a backup now, download one and delete one. A backup holds everything in the panel's database, including the encrypted secrets of apps and databases, so downloading asks for the password and is recorded in the audit log. |
 | `github.manage`<br/>**Connect GitHub** | Create the panel's GitHub App, install it on an account and disconnect it. The app can read the code of the repositories you give it access to on GitHub, and anyone who may create apps can then deploy those repositories. |
 | `notifications.manage`<br/>**Manage notifications** | Choose where alerts are sent (Slack, Discord, Teams, ntfy, Telegram or any webhook) and which events each target gets, send a test message and switch a target off. Addresses are stored encrypted and never shown again; messages say what happened and link to the panel, never logs or secrets. |
+| `server.key`<br/>**See the encryption key** | Show the panel's encryption key (APP_KEY). Anyone who holds it together with a copy of the panel's database can read every stored secret: environment variables, database passwords, tokens. Asks for the password unless it was confirmed recently, and every visit is recorded in the audit log as a high-risk action. |
 | `server.view`<br/>**View the server** | See host resources, service states, Docker and nginx status. |
 | `server.manage`<br/>**Manage Docker and nginx** | Reload nginx, test its configuration, remove unused images and read container logs. |
 
@@ -67,6 +68,7 @@ This page is generated from the permission list in the panel's code, so it match
 | `roles.manage`<br/>**Manage roles** | Create, edit and delete roles. A role can only grant permissions you hold yourself. |
 | `permissions.view`<br/>**View permissions** | See the list of permissions and what each one allows. |
 | `audit.view`<br/>**View the audit log** | Read the record of who did what on this panel. |
+| `audit.export`<br/>**Export the audit log** | Download the audit log (with the filters you chose) as a CSV or JSON file. It lists who did what and from which address. Asks for the password unless it was confirmed recently, and every export is recorded in the audit log. |
 
 ## Users
 
@@ -76,3 +78,5 @@ This page is generated from the permission list in the panel's code, so it match
 | `users.create`<br/>**Create users** | Create accounts. A user can only be given a role that grants no more than the creator has. |
 | `users.update`<br/>**Update users** | Change a user's name, email, password and role. Not the super user, and not users with more access than you have. |
 | `users.delete`<br/>**Delete users** | Delete accounts. Not the super user, yourself, or users with more access than you have. |
+| `sessions.view`<br/>**See other users' sessions** | See where other users are signed in: IP address, browser and when they were last active. Every look is recorded in the audit log. |
+| `sessions.revoke`<br/>**Sign other users out** | End other users' sessions, one browser or all of them. Not the super user and not users with more access than you have. Asks for the password unless it was confirmed recently, and is recorded in the audit log. |

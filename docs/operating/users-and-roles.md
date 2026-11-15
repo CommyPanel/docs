@@ -53,6 +53,13 @@ You can **filter** the log by time (today, last 7 days, last month, last year or
 
 The log is read-only. Reading it needs `audit.view`.
 
+**Exporting.** With `audit.export`, the **Export CSV** and **Export JSON** buttons download the entries that match the filters on screen (up to 50,000, newest first) with the time, risk, person, action, address, browser and details. It asks for your password, and the export itself is recorded in the audit log. In the CSV, cells that start with `=`, `+`, `-` or `@` get a leading apostrophe so a spreadsheet does not run them as formulas.
+
 ## Sessions
+
+**Your own.** **Settings → Security → Active sessions** lists every browser where you are signed in: the browser and system, the IP address and when it was last active, with **This browser** marked. **Sign out** ends one of them, and **Sign out all other browsers** ends the rest; if you see one you do not recognise, do that and change your password. The list shows browsers active within the session lifetime and only works with the default database session driver. Session ids are never sent to the page.
+
+**Other people's.** With `sessions.view`, the **Sessions** button on the Users page shows where someone else is signed in (every look is audited). With `sessions.revoke` you can also sign them out, one browser or all, after confirming your password. The usual rules apply: you cannot do it to a user with more access than you have, and nobody can do it to the super user.
+
 
 Sessions last 2 hours of inactivity by default (`SESSION_LIFETIME`, in minutes) and are served only over HTTPS cookies. Behind your panel domain, set `SESSION_SECURE_COOKIE=true` (the installer does).
