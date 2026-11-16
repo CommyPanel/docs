@@ -20,18 +20,33 @@ CommyPanel looks at your repository in this order, and uses the first match:
 2. **.NET**: a `.csproj` or `.sln` file. There must be exactly one web project (SDK `Microsoft.NET.Sdk.Web`) targeting .NET 6 or newer. With several, add a Dockerfile to choose one.
 3. **Go**: a `go.mod` file. The `main` package is found in the repository root or in a `cmd/<name>` folder; with several programs, add a Dockerfile to choose one.
 4. **Node.js**: a `package.json` file with a `start` script or a `main` file.
+5. **Python**: a `requirements.txt`, `pyproject.toml` or `Pipfile`. Python comes last because many projects in other languages carry a `requirements.txt` for tooling; a `package.json`, `go.mod`, .NET project or `Dockerfile` in the same repository wins.
 
 You can also choose the type by hand when you create the app. If it does not match what is in the repository, the deployment fails with a clear message rather than guessing.
 
 ### What is generated
 
-For .NET, Go and Node, CommyPanel writes a **multi-stage Dockerfile** (build stage, then a slim runtime stage that runs as a non-root user). You see its notes at the top of the deployment log.
+For .NET, Go, Node and Python, CommyPanel writes a **multi-stage Dockerfile** (build stage, then a slim runtime stage that runs as a non-root user). You see its notes at the top of the deployment log.
 
 | Stack | Build | Runtime |
 |---|---|---|
 | **.NET** | `dotnet publish` with the SDK image for your target framework | the ASP.NET runtime image; listens on `http://+:PORT`; runs as the image's app user from .NET 8 |
 | **Go** | `go build` with the Go version in your `go.mod`, without cgo | a distroless static image running as non-root; the binary is `/app` |
 | **Node.js** | `npm ci` (or pnpm or yarn, detected from your lockfile or `packageManager`), then `build` if your `package.json` has that script, then production dependencies only | `node:<major>-slim` where the major version comes from `engines.node` or `.nvmrc` (24 by default, 18 at least); `NODE_ENV=production`; runs as the `node` user; starts with your `start` script, or `node <main>` |
+| **Python** | `pip`, Poetry, uv or Pipenv into a virtual environment, in the full `python:<version>` image | `python:<version>-slim` as a non-root user; started with the `Procfile` line, uvicorn or gunicorn |
+
+### Python apps
+
+CommyPanel finds how to start your app in this order:
+
+1. A **`Procfile`** with a `web:` line (the Heroku convention), for example `web: gunicorn -w 4 app:create_app() -b 0.0.0.0:$PORT`. It runs as written, so you are in full control.
+2. **Django**: the project's `wsgi.py` (`gunicorn <project>.wsgi:application`). With several `wsgi.py` files, add a `Procfile`.
+3. **FastAPI, Starlette and Quart**: the file that creates the app object (`app = FastAPI()` in `main.py`, `app.py`, `api.py`, `server.py`, `asgi.py` or `application.py`, in the root or one folder down), started with **uvicorn**.
+4. **Flask**: the same search for `app = Flask(...)`, or a `create_app()` function, started with **gunicorn**.
+
+If none of these applies, the deployment stops with a message that asks for a `Procfile` line or a `Dockerfile`; nothing is guessed. uvicorn or gunicorn is added to the image when your dependencies do not list it.
+
+Dependencies come from, in this order: `uv.lock` (uv), `[tool.poetry]` in `pyproject.toml` (Poetry, production dependencies only), `requirements.txt` (pip), a `Pipfile` (Pipenv) or a plain `pyproject.toml` (`pip install .`). The Python version comes from `.python-version`, `runtime.txt` or `requires-python` in `pyproject.toml` (3.9 to 3.14; a lower bound such as `>=3.10` alone means 3.12, the default). The build runs in the full Python image, so packages that compile code work; the **runtime is the slim image** and runs as a non-root user. If a dependency needs a system library at run time (for example `libpq` for `psycopg2`), use `psycopg2-binary` or add a **Dockerfile**.
 
 Your app must listen on the port CommyPanel gives it, which it passes as the **`PORT`** environment variable. The **app port** setting tells CommyPanel which port to publish; the app should read `PORT`.
 

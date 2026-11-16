@@ -48,7 +48,7 @@ An **app**:
 |---|---|
 | `slug`, `name` | The app's identifier and name |
 | `status` | `new`, `deploying`, `running`, `failed`, `stopped` or `deactivated` |
-| `stack` | `dotnet`, `go`, `node`, `dockerfile` or `null` |
+| `stack` | `dotnet`, `go`, `node`, `python`, `dockerfile`, `template` or `null` |
 | `deploy_strategy` | `rolling` (zero downtime) or `stop_first` (the old version stops first, for software that cannot run twice on the same data) |
 | `domains` | Connected domain names |
 | `live_deployment` | The number of the release that is live, or `null` |

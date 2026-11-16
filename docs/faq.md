@@ -16,7 +16,7 @@ It is **pre-1.0 and under heavy development**. It is a good fit for side project
 | | CommyPanel | Coolify |
 |---|---|---|
 | **Servers** | One server, by design | Many servers from one panel |
-| **What you deploy** | Stateless apps in .NET, Go and Node (automatic Dockerfile), or anything with your own Dockerfile | A broad range of apps, frameworks, Docker Compose stacks and a large catalog of one-click services |
+| **What you deploy** | Stateless apps in .NET, Go, Node and Python (automatic Dockerfile), ready-made apps, or anything with your own Dockerfile | A broad range of apps, frameworks, Docker Compose stacks and a large catalog of one-click services |
 | **The panel itself** | Runs on the host under systemd, so it keeps working when Docker does not | Runs as containers |
 | **Reverse proxy** | nginx on the host | A proxy in a container (Traefik or Caddy) |
 | **Panel storage** | A few SQLite files | A database and cache |
@@ -54,7 +54,7 @@ Yes. Choose **I'll upload it myself** and upload a `.zip` or `.tar.gz` of your p
 
 ## Which languages are supported?
 
-.NET, Go and Node get an automatic Dockerfile. Anything else works if your repository has a **Dockerfile**, which always wins.
+.NET, Go, Node and Python get an automatic Dockerfile. Anything else works if your repository has a **Dockerfile**, which always wins.
 
 ## Is my data safe?
 

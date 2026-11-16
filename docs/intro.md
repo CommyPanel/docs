@@ -8,7 +8,7 @@ description: "CommyPanel is a self-hosted control panel for running apps, domain
 
 CommyPanel is an open-source, self-hosted **server control panel**. You install it on a server you own, and from its web interface you can:
 
-- **Deploy apps** from a Git repository (or a zip) with **zero downtime**: .NET, Go and Node apps get a Dockerfile generated for them, and any app with its own Dockerfile works too.
+- **Deploy apps** from a Git repository (or a zip) with **zero downtime**: .NET, Go, Node and Python apps get a Dockerfile generated for them, and any app with its own Dockerfile works too.
 - **Connect domains**: it shows you which DNS records to create, checks them, and issues and renews **Let's Encrypt** certificates.
 - **Run databases**: PostgreSQL, MySQL and MariaDB in containers, linked to your apps over private networks, backed up nightly, and opened in phpMyAdmin or pgAdmin with one click, or opened to chosen IP addresses on the internet for a limited time, with TLS.
 - **Deploy safely**: the new release is watched after it goes live and rolled back by itself if it is clearly worse, and you can roll it out to your visitors [gradually](apps/safe-deployments.md).
