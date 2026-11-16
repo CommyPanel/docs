@@ -26,6 +26,10 @@ password and are written to the audit log, as is every deployment a token starts
 A token is checked against its owner's **current** permissions on every call: if the owner loses
 `apps.deploy`, the token stops being able to deploy. Deleting the owner deletes their tokens.
 
+## From a terminal
+
+The [`commy` command](commy-cli.md) wraps the API for use on your own machine or in a script (`commy deploy shop`, `commy logs shop`, `commy env set ...`), and the same API is available as the Go library `commypanel-go`.
+
 ## Calls
 
 All calls are under `/api/v1`, send `Accept: application/json` and `Authorization: Bearer <token>`.
