@@ -49,6 +49,7 @@ An **app**:
 | `slug`, `name` | The app's identifier and name |
 | `status` | `new`, `deploying`, `running`, `failed`, `stopped` or `deactivated` |
 | `stack` | `dotnet`, `go`, `node`, `dockerfile` or `null` |
+| `deploy_strategy` | `rolling` (zero downtime) or `stop_first` (the old version stops first, for software that cannot run twice on the same data) |
 | `domains` | Connected domain names |
 | `live_deployment` | The number of the release that is live, or `null` |
 | `latest_deployment` | The newest deployment (a deployment object), or `null` |
@@ -64,6 +65,7 @@ A **deployment**:
 | `finished` | `true` once it is over, whatever the result |
 | `succeeded` | `true` if it went live (it is `active`, or was and has been replaced) |
 | `commit`, `commit_message` | The short commit and its first line, if known |
+| `strategy` | `rolling` or `stop_first`: how this deployment replaced the running version |
 | `is_rollback` | `true` for a rollback |
 | `error` | The reason, for a failure |
 | `created_at`, `finished_at` | ISO 8601 times |

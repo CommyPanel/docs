@@ -29,6 +29,10 @@ sequenceDiagram
 4. **Switch**: nginx's upstream is rewritten and reloaded **gracefully**, which does not drop open connections.
 5. **Drain**: the old container keeps running for a few seconds (10 by default, `DEPLOY_DRAIN_SECONDS`) so in-flight requests finish, then it stops.
 
+## When a version cannot run twice
+
+Software that must never run twice on the same data (Redis, Elasticsearch, Garage) cannot start a second copy beside the old one. An app can choose the deploy mode **Stop the old version first** instead (see [Deploying apps](../apps/deploying.md#deploy-mode)): build and release command as usual, then the old version stops, the new one starts and is health-checked, and nginx switches. This **is not zero downtime**: the app is unavailable for a short while. If the new version does not start, the old one is started again.
+
 ## If something fails
 
 At any step before the switch, **the old container keeps serving** and nothing changes: a failed build, a failing [release command](../apps/release-command.md), a container that does not start, or a health check that never passes. The deployment is marked failed with the reason, and the new container is removed.

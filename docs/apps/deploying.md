@@ -52,6 +52,12 @@ Older images are kept so that **Roll back** is instant: the last 3 per app by de
 
 On the app page, **Settings** holds the branch, the app port, the health check path, memory and CPU limits and the release command. Changes apply from the next deployment. Environment variables, volumes and links have their own tabs, and take effect when you [apply the changes](lifecycle.md#applying-changes-without-a-deployment).
 
+### Deploy mode
+
+By default a deployment is **zero downtime**: the new version starts next to the old one. Some software must never run twice on the same data (Redis, Elasticsearch, Garage, many databases). For these, set **Deploy mode** on the Settings tab (or in the new-app wizard) to **Stop the old version first**. The build and the release command still run while the old version serves. Then the old version is stopped, the new one starts and must pass its health check. If it does not, the new container is removed and **the old version is started again**, so a failed deploy still ends with the app running, and the deployment says so. Rollbacks and Apply changes use the same mode.
+
+The app is **unavailable** between the stop and the moment the new version answers, so use it only where you must. A stop-first app has no [gradual rollouts or watch](safe-deployments.md) (there is no second version to compare or go back to instantly), and those settings are shown as not applying. Each deployment's page shows the mode it used. Ready-made Redis, Garage and Elasticsearch apps use this mode from the start.
+
 By default an app gets **512 MB** of memory and **one CPU core**; set limits to change that.
 
 ## Who can do what
