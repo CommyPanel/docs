@@ -28,7 +28,7 @@ A token is checked against its owner's **current** permissions on every call: if
 
 ## From a terminal
 
-The [`commy` command](commy-cli.md) wraps the API for use on your own machine or in a script (`commy deploy shop`, `commy logs shop`, `commy env set ...`), and the same API is available as the Go library `commypanel-go`.
+The [`commy` command](commy-cli.md) wraps the API for use on your own machine or in a script (`commy deploy shop`, `commy logs shop`, `commy env set ...`), and the same API is available as [libraries for Go, Node.js, Python, PHP and .NET](api-libraries.md).
 
 ## Calls
 

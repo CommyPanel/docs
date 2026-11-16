@@ -70,4 +70,4 @@ Most commands accept `--json`. A variable you set takes effect with `commy apply
 
 ## From your own code
 
-The same API is available as a small Go library, [`commypanel-go`](https://github.com/commypanel/commypanel-go), which `commy` is built on. It uses only the Go standard library and has the same safety rules.
+The same API is available as small libraries for Go (which `commy` is built on), Node.js, Python, PHP and .NET: see [API libraries](api-libraries.md).

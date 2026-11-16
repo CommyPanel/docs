@@ -50,6 +50,7 @@ const sidebars: SidebarsConfig = {
         'operating/backups',
         'operating/api-and-ci',
         'operating/commy-cli',
+        'operating/api-libraries',
         'operating/notifications',
         'operating/maintenance',
       ],
