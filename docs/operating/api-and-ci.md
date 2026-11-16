@@ -64,7 +64,26 @@ A deployment can also have the status `rollout` (a [gradual rollout](../apps/saf
 
 ## GitHub Actions
 
-Store the token as a repository secret (`COMMYPANEL_TOKEN`) and the panel address as a variable.
+The easiest way is the **[deploy-action](https://github.com/CommyPanel/deploy-action)**: it installs a pinned, checksum-verified `commy`, deploys, waits and fails the job if the deployment fails. Store the token as a repository secret (`COMMY_TOKEN`) and the panel address as a variable (`COMMY_URL`):
+
+```yaml
+permissions:
+    contents: read
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: CommyPanel/deploy-action@<full commit SHA>
+              with:
+                  url: ${{ vars.COMMY_URL }}
+                  app: shop
+                  token: ${{ secrets.COMMY_TOKEN }}
+```
+
+Pin the action by commit, deploy only from a push to a protected branch (the action refuses pull-request runs), and use a token limited to that one app with only `apps:deploy` and `apps:read`.
+
+Without the action, call the API directly:
 
 ```yaml
 - name: Deploy
