@@ -15,7 +15,7 @@ Besides [the `commy` command](commy-cli.md), the [API](../reference/api.md) has 
 | PHP | [commypanel-php](https://github.com/CommyPanel/commypanel-php) | `commypanel/commypanel` (Composer) |
 | .NET | [commypanel-dotnet](https://github.com/CommyPanel/commypanel-dotnet) | `CommyPanel.Client` (NuGet) |
 
-The Go library is installable now. The other four are being prepared for their package registries; until a package is listed there, install it from its repository (each README says how).
+All five are installable from their registries: `go get` for Go, `npm install commypanel`, `pip install commypanel`, `composer require commypanel/commypanel` and `dotnet add package CommyPanel.Client`. Pin the version you tested.
 
 ## What they all do
 
