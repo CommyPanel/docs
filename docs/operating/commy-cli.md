@@ -20,11 +20,10 @@ The script downloads the binary for your system, checks its SHA-256 checksum aga
 Make a token under **Settings > API tokens**: only the abilities it needs, limited to the apps it needs, with an expiry (see [API tokens and deploying from CI](api-and-ci.md)). Then:
 
 ```bash
-read -rs COMMY_TOKEN && export COMMY_TOKEN
-commy login --url https://panel.example.com
+commy login
 ```
 
-`login` checks the token and saves the address and token in `commy/config.json` in your config folder, readable only by you. In CI, skip `login` and set `COMMY_URL` and `COMMY_TOKEN` from your secrets. The token is never accepted as an argument (it would land in the process list and shell history), and a saved token is only sent to the address it was saved with. A panel that still uses its self-signed certificate is refused: give it a domain and a certificate, or pass the certificate authority with `--ca-file`.
+`login` asks for the panel address and then for the token, which is typed hidden. It checks the token with the panel first: a wrong, revoked or expired one is reported and nothing is saved. A good one is saved, with the address, in `commy/config.json` in your config folder, readable only by you. You can also give the address up front (`--url`) or pipe the token in. In CI, skip `login` and set `COMMY_URL` and `COMMY_TOKEN` from your secrets. The token is never accepted as an argument (it would land in the process list and shell history), and a saved token is only sent to the address it was saved with. A panel that still uses its self-signed certificate is refused: give it a domain and a certificate, or pass the certificate authority with `--ca-file`.
 
 ## Commands
 
@@ -40,6 +39,7 @@ commy login --url https://panel.example.com
 | `commy env list <app>` | The names of its variables (values are never shown) | `apps:env` |
 | `commy env set <app> <KEY>` | Set a variable; the value comes from stdin or `--from-file` | `apps:env` |
 | `commy env unset <app> <KEY>` | Remove a variable | `apps:env` |
+| `commy update` | Look for a newer commy and install it after a yes (`--check` only looks, `--yes` skips the question) | none |
 | `commy logout` | Forget the saved login | none |
 
 ```bash
@@ -66,7 +66,8 @@ Most commands accept `--json`. A variable you set takes effect with `commy apply
 - No secrets on the command line, and asking for one in a terminal is refused instead of shown.
 - The saved login is private to you, and a copy that others can read is refused.
 - Text from your apps (logs, commit messages, error sentences) has terminal control characters made visible, so a hostile log line cannot retitle your window or write to your clipboard.
-- No telemetry and no self-update.
+- `commy update` is the only time commy calls out on its own, and only when you run it. It downloads the release for your system over https, checks its SHA-256 against the release's `SHA256SUMS` and only then replaces the program; a failed check changes nothing. Your token is never part of that request.
+- No telemetry.
 
 ## From your own code
 
