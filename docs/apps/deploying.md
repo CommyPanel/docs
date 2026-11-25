@@ -63,6 +63,10 @@ If any step fails, **the old version keeps serving** and the deployment is marke
 
 Older images are kept so that **Roll back** is instant: the last 3 per app by default (`DEPLOY_KEEP_IMAGES`). A rollback starts a container from an older image without building anything. It does not undo changes to [volumes](volumes.md) or databases.
 
+## Deploying without the cache
+
+A normal deployment reuses the layers of earlier builds, so only what changed is built again. The arrow next to **Deploy** on an app's page offers **Deploy without cache**: it builds every step again and fetches the base images anew. It is slower. Use it to pick up updates of the base image (security fixes are not fetched on their own), or when a cached step has kept something stale. It works for every app, including ready-made apps. The log says when a build ran without the cache. Rolling back and applying changes build nothing, so they are not affected.
+
 ## Settings
 
 On the app page, **Settings** holds the branch, the app port, the health check path, memory and CPU limits and the release command. Changes apply from the next deployment. Environment variables, volumes and links have their own tabs, and take effect when you [apply the changes](lifecycle.md#applying-changes-without-a-deployment).
