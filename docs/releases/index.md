@@ -9,6 +9,8 @@ Each release has notes that say **what is new**, **what to do before you upgrade
 
 | Version | Highlights |
 |---|---|
+| [0.11.0](v0.11.0.md) | Laravel apps (database step, services, `.env` editor, release script), wildcard domains and certificates, metrics for Prometheus and Grafana, four more ready-made apps |
+| [0.10.1](v0.10.1.md) | A shorter menu on the app page, with related sections under drop-downs |
 | [0.10.0](v0.10.0.md) | A bigger API with an OpenAPI file, the `commy` command and clients for Go, Node, Python, PHP and .NET, a deploy mode that stops the old version first, Python apps |
 | [0.9.2](v0.9.2.md) | Redeploying Elasticsearch, Redis and Garage works: a deploy mode that stops the old version first; memory chosen on the create page |
 | [0.9.1](v0.9.1.md) | Search engines are told to ignore every page of the panel |

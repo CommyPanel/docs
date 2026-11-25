@@ -16,6 +16,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'apps/deploying',
         'apps/ready-made-apps',
+        'apps/laravel',
         'apps/private-repositories',
         'apps/github',
         'apps/deploy-on-push',
@@ -52,6 +53,7 @@ const sidebars: SidebarsConfig = {
         'operating/commy-cli',
         'operating/api-libraries',
         'operating/notifications',
+        'operating/metrics',
         'operating/maintenance',
       ],
     },

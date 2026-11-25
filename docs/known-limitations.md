@@ -10,14 +10,14 @@ CommyPanel is pre-1.0 and under heavy development. What you should know before y
 ## Scope
 
 - **One server only.** There is no multi-server support, no Swarm and no Kubernetes, and none is planned.
-- **Stateless apps first.** .NET, Go, Node and Python get automatic Dockerfiles. PHP stacks such as Laravel and WordPress are not supported yet; a set of [ready-made apps](apps/ready-made-apps.md) installs from official images. An app with its **own Dockerfile** works regardless of language. [Persistent volumes](apps/volumes.md) exist for files that must survive deployments.
+- **Stateless apps first.** .NET, Go, Node and Python get automatic Dockerfiles. Laravel has its own [guide](apps/laravel.md); WordPress is not supported yet; a set of [ready-made apps](apps/ready-made-apps.md) installs from official images. An app with its **own Dockerfile** works regardless of language. [Persistent volumes](apps/volumes.md) exist for files that must survive deployments.
 - **No Docker Compose** and **no preview deployments** per branch.
 - **Debian 13 and Ubuntu 24.04 / 26.04 only**, on `amd64` and `arm64`. Debian 12 and RPM-based systems are not supported.
 
 ## Certificates and domains
 
-- **No wildcard certificates** yet; they need DNS-01 validation.
-- Certificates are validated over HTTP, so every name on a certificate must already point at the server.
+- **Wildcard certificates** need a Cloudflare API token, or a TXT record you create by hand, and by hand **every renewal asks for a new record**. Only Cloudflare is connected automatically; other DNS providers use the manual way.
+- Plain names on a certificate are validated over HTTP, so each must already point at the server.
 
 ## Databases and backups
 
